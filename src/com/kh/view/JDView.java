@@ -56,7 +56,13 @@ public class JDView {
 		
 		System.out.println("추가하실 개념을 입력해주세요~");
 	    System.out.print("개념명: ");
-	    String name = sc.nextLine();
+	    String name = null;
+	    try {
+	    name = sc.nextLine();
+	    } catch (InputMismatchException e){
+	    	System.out.println("입력하신 개념의 이름이 맞는지 확인해주세요.");
+	    	jdCreate();
+	    }
 	    System.out.print("개념 정의: ");
 	    String meaning = sc.nextLine();
 	    
@@ -107,23 +113,27 @@ public class JDView {
 		System.out.println("📖사전 삭제하기🗑️");
 		System.out.print("📖삭제하실 개념의 이름을 입력해주세요🗑️ > ");
 		
-		jdGetByName();
 		JDDTO dto = jdGetByName();
+		if(dto == null) return; 
 		
+		while(true) {
 		System.out.println("정말 삭제하시겠습니까?(Y/N) >");
 		char choice = sc.nextLine().toUpperCase().charAt(0);
 
 			if(choice == 'Y') {
 				ctrl.jdDelete(dto.getNum());  // num을 뽑아서 전달! => 삭제
 				System.out.println("삭제 완료");
-			} else if(choice == 'N') {
-		    	return;
+				break;
+			} else if(choice == 'N') { 
+				System.out.println("삭제를 취소하셨습니다.");
+				break;
+			} else {
+				System.out.println("Y나 N으로 입력해주세요!");
 			}
-		
+		}
 		System.out.println();
 	    System.out.println("메인 화면으로 돌아갑니다.");
 	    System.out.println();
-		
 	}
 
 	

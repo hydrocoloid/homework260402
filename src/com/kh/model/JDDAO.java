@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class JDDAO {
 		private ArrayList<JDDTO> list = new ArrayList<>();
-		private int nextNum; // 미리 넣은 데이터가 1,2,3이니까 4부터 시작함.
+		//private int nextNum; // 미리 넣은 데이터가 1,2,3이니까 4부터 시작함.
 		
 		public JDDAO() {
 	        list.add(new JDDTO(1, "생성자", "클래스로부터 객체를 생성할 때 자동으로 호출되는 특수한 메서드."));
@@ -14,9 +14,9 @@ public class JDDAO {
 		
 		
 		public void jdCreate(JDDTO dto) {
-			dto.setNum(nextNum);  // 순번 자동 부여
-		    nextNum = list.size()+1;            // 다음 순번 증가
-		    list.add(dto);
+		    int nextNum = list.size() + 1;   // 1) 먼저 순번 계산
+		    dto.setNum(nextNum);             // 2) 계산한 순번을 dto에 넣기
+		    list.add(dto);                   // 3) list에 추가
 		}
 		
 		
