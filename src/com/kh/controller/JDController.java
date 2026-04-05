@@ -18,11 +18,14 @@ private JDService svc = new JDService();
 	
 	public void jdUpdate(int num, String name, String meaning) {
 		svc.jdUpdate(num, name, meaning);
-	        }
+	}
 	
 	public void jdDelete(int num) {
 		svc.jdDelete(num);
-	        }
+	}
 	
+	public JDDTO jdGetByName(String name) {
+		return svc.jdGetByName(name);
+	}
 
 }

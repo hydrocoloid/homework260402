@@ -16,11 +16,15 @@ public class JDService {
 	
 	public void jdUpdate(int num, String name, String meaning) {
 		dao.jdUpdate(num, name, meaning);
-	        }
+	}
 	
 	public void jdDelete(int num) {
 	    dao.jdDelete(num);
-	        }
+	}
+	
+	public JDDTO jdGetByName(String name) {
+		return dao.jdGetByName(name);
+	}
 	
 
 }
