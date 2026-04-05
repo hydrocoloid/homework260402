@@ -26,7 +26,9 @@ public class JDView {
 		sc.nextLine();
 		
 		switch(num){
-			case 0: System.out.println("자바사전을 종료합니다."); sc.close();
+			case 0: System.out.println(); 
+					System.out.println("자바사전을 종료합니다."); 
+					sc.close();
 				return;
 			case 1: jdCreate();
 				break;
@@ -36,7 +38,8 @@ public class JDView {
 				break;
 			case 4:	jdDelete();
 				break;
-			default: System.out.println("정확한 메뉴 번호를 입력해주세요.");
+			default: System.out.println("자바사전을 종료합니다.");
+					 System.out.println("정확한 메뉴 번호를 입력해주세요.");
 				break;
 			}
 		} catch(InputMismatchException e){
@@ -97,13 +100,43 @@ public class JDView {
 	}
 	
 	
-	
-		
-	
 	public void jdUpdate() {
-	
-		
-		
+
+	    System.out.println();
+	    System.out.println("📖사전 수정하기✏️");
+	    System.out.print("📖수정하실 개념의 이름을 입력해주세요✏️ > ");
+
+	    JDDTO dto = jdGetByName();
+
+	    if(dto == null) return;
+
+	    System.out.println("수정할 내용을 입력해주세요.");
+	    System.out.print("새 개념명: ");
+	    String name = sc.nextLine();
+	    System.out.print("새 개념 정의: ");
+	    String meaning = sc.nextLine();
+
+	    while(true) {
+	        System.out.print("정말 수정하시겠습니까?(Y/N) > ");
+	        char choice = sc.nextLine().toUpperCase().charAt(0);
+
+	        if(choice == 'Y') {
+	            ctrl.jdUpdate(dto.getNum(), name, meaning);
+	            System.out.println();
+	            System.out.println("수정 완료!");
+	            break;
+	        } else if(choice == 'N') {
+	        	System.out.println();
+	            System.out.println("수정을 취소합니다.");
+	            break;
+	        } else {
+	        	System.out.println();
+	            System.out.println("⚠️Y나 N으로 입력해주세요!⚠️");
+	        }
+	    }
+
+	    System.out.println("메인 화면으로 돌아갑니다.");
+	    System.out.println();
 	}
 
 	
@@ -122,16 +155,18 @@ public class JDView {
 
 			if(choice == 'Y') {
 				ctrl.jdDelete(dto.getNum());  // num을 뽑아서 전달! => 삭제
+				System.out.println();
 				System.out.println("삭제 완료");
 				break;
-			} else if(choice == 'N') { 
+			} else if(choice == 'N') {
+				System.out.println();
 				System.out.println("삭제를 취소하셨습니다.");
 				break;
 			} else {
-				System.out.println("Y나 N으로 입력해주세요!");
+				System.out.println();
+				System.out.println("⚠️Y나 N으로 입력해주세요!⚠️");
 			}
 		}
-		System.out.println();
 	    System.out.println("메인 화면으로 돌아갑니다.");
 	    System.out.println();
 	}
@@ -159,12 +194,14 @@ public class JDView {
 		            jdReadAll();           // 전체 조회 수행.
 		            return null;
 		        } else {
-		            System.out.println("1 또는 2를 입력해주세요.");
+		        	System.out.println();
+		            System.out.println("⚠️1 또는 2를 입력해주세요.⚠️");
 		            return null;
 		        }
 
 		    } catch(InputMismatchException e) {
-		        System.out.println("숫자만 입력해주세요.");
+		    	System.out.println();
+		        System.out.println("⚠️숫자만 입력해주세요.⚠️");
 		        sc.nextLine();
 		        return null;
 		    }
@@ -175,7 +212,5 @@ public class JDView {
 		
 		return dto;
 	}
-	
-	
 
 }
